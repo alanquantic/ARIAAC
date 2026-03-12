@@ -42,7 +42,6 @@ export interface DiagnosticFormValues {
   companySize: string;
   region: string;
   businessPriority: string;
-  aiOpportunityArea: string;
   mainConcern: string;
   q1: number;
   q2: number;
@@ -77,6 +76,12 @@ export interface TrainingRecommendation {
   modules: string[];
 }
 
+export interface OpportunityRecommendation {
+  area: string;
+  rationale: string;
+  examples: string[];
+}
+
 export interface GeneratedReport {
   aiMode: "rules" | "openai-assisted" | "gemini-assisted";
   summary: string;
@@ -85,6 +90,7 @@ export interface GeneratedReport {
   priorityGaps: string[];
   risks: string[];
   dimensionInsights: Record<DimensionKey, string>;
+  opportunityRecommendation?: OpportunityRecommendation;
   roadmap: RoadmapPhase[];
   trainingRecommendation: TrainingRecommendation;
 }

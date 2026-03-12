@@ -48,16 +48,71 @@ export const BUSINESS_PRIORITIES = [
   "Cumplimiento y riesgo",
 ];
 
-export const OPPORTUNITY_AREAS = [
-  "Recursos Humanos",
-  "Operaciones",
-  "Logística",
-  "Compras",
-  "Calidad",
-  "Mantenimiento",
-  "Ventas",
-  "Servicio al cliente",
-];
+export const OPPORTUNITY_GUIDE = [
+  {
+    area: "Recursos Humanos",
+    fit: "Suele ser una buena puerta de entrada cuando la prioridad es talento, liderazgo o rotación.",
+    examples: [
+      "onboarding y capacitación interna",
+      "descripciones de puesto y evaluaciones",
+      "comunicación y soporte al colaborador",
+    ],
+  },
+  {
+    area: "Operaciones",
+    fit: "Conviene cuando la organización busca productividad, estandarización y menos retrabajo.",
+    examples: [
+      "consultas sobre SOP y procedimientos",
+      "reportes operativos y handoffs",
+      "seguimiento de incidencias",
+    ],
+  },
+  {
+    area: "Calidad y cumplimiento",
+    fit: "Es útil cuando pesan el riesgo, la trazabilidad o los requerimientos regulatorios.",
+    examples: [
+      "auditorías y evidencia documental",
+      "análisis de no conformidades",
+      "control de políticas y lineamientos",
+    ],
+  },
+  {
+    area: "Logística",
+    fit: "Suele dar valor rápido en sectores con inventario, distribución o coordinación de rutas.",
+    examples: [
+      "seguimiento de embarques",
+      "priorización de pedidos",
+      "consultas operativas para almacén",
+    ],
+  },
+  {
+    area: "Mantenimiento",
+    fit: "Es una vía clara cuando la continuidad operativa depende de equipos, manuales o tickets.",
+    examples: [
+      "consulta de manuales y fallas recurrentes",
+      "clasificación de tickets",
+      "bitácoras y recomendaciones iniciales",
+    ],
+  },
+  {
+    area: "Comercial y servicio",
+    fit: "Funciona bien cuando importa acelerar respuesta, atención y seguimiento comercial.",
+    examples: [
+      "respuestas a clientes y prospectos",
+      "cotizaciones y propuestas base",
+      "FAQ y seguimiento postventa",
+    ],
+  },
+  {
+    area: "Administración y finanzas",
+    fit: "Suele ser buen inicio si la prioridad es automatización administrativa y productividad de back office.",
+    examples: [
+      "reportes ejecutivos y conciliaciones",
+      "análisis de gastos y tableros",
+      "gestión documental y solicitudes internas",
+    ],
+  },
+] as const;
 
 export const MAIN_CONCERNS = [
   "Falta de habilidades",

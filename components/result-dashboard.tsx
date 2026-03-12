@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, Download, Gauge, ShieldCheck, Sparkles } from "lucide-react";
 
 import { DIMENSION_LABELS, MATURITY_DESCRIPTIONS } from "@/lib/constants";
-import { buildDimensionNarrative } from "@/lib/report";
+import { buildDimensionNarrative, getOpportunityRecommendation } from "@/lib/report";
 import { SubmissionRecord } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 
@@ -26,6 +26,7 @@ function ScoreDial({ score }: { score: number }) {
 
 export function ResultDashboard({ submission }: { submission: SubmissionRecord }) {
   const { id, input, scores, report, createdAt } = submission;
+  const opportunityRecommendation = getOpportunityRecommendation(input, scores, report);
 
   return (
     <main className="pb-16 pt-6 md:pb-24">
@@ -103,6 +104,35 @@ export function ResultDashboard({ submission }: { submission: SubmissionRecord }
                     </p>
                   </div>
                 ))}
+              </div>
+
+              <div className="mt-6 rounded-[24px] border border-[rgba(245,158,11,0.14)] bg-[var(--card-strong)] px-5 py-5">
+                <p className="eyebrow">Área sugerida para empezar</p>
+                <div className="mt-3 grid gap-4 lg:grid-cols-[0.7fr_1.3fr]">
+                  <div className="rounded-[20px] border border-white/70 bg-white/85 px-4 py-4">
+                    <p className="text-xs uppercase tracking-[0.2em] text-[var(--ink-soft)]">
+                      Prioridad sugerida
+                    </p>
+                    <h3 className="mt-2 text-2xl font-semibold text-[var(--navy)]">
+                      {opportunityRecommendation.area}
+                    </h3>
+                  </div>
+                  <div>
+                    <p className="text-sm leading-7 text-[var(--ink-soft)]">
+                      {opportunityRecommendation.rationale}
+                    </p>
+                    <div className="mt-4 grid gap-3 md:grid-cols-3">
+                      {opportunityRecommendation.examples.map((item) => (
+                        <div
+                          key={item}
+                          className="rounded-2xl border border-white/70 bg-white/85 px-4 py-4 text-sm leading-7 text-[var(--ink-soft)]"
+                        >
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </section>

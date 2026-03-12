@@ -1,7 +1,14 @@
 import OpenAI from "openai";
 
-import { DIMENSION_LABELS, MATURITY_DESCRIPTIONS } from "@/lib/constants";
-import { DiagnosticFormValues, DimensionKey, GeneratedReport, RoadmapPhase, ScoreBreakdown } from "@/lib/types";
+import { DIMENSION_LABELS, MATURITY_DESCRIPTIONS, OPPORTUNITY_GUIDE } from "@/lib/constants";
+import {
+  DiagnosticFormValues,
+  DimensionKey,
+  GeneratedReport,
+  OpportunityRecommendation,
+  RoadmapPhase,
+  ScoreBreakdown,
+} from "@/lib/types";
 
 const dimensionPriority: DimensionKey[] = ["strategy", "talent", "process", "governance"];
 
@@ -95,7 +102,97 @@ function buildBusinessImpact(input: DiagnosticFormValues, scores: ScoreBreakdown
   return `Hoy la mejor palanca para ${input.businessPriority.toLowerCase()} está en combinar formación aplicada con decisiones organizacionales. ${DIMENSION_LABELS[highDimension]} aparece como una fortaleza relativa, mientras que ${DIMENSION_LABELS[lowDimension].toLowerCase()} necesita atención inmediata para evitar una adopción superficial o fragmentada.`;
 }
 
-function buildStrengths(input: DiagnosticFormValues, scores: ScoreBreakdown) {
+function inferOpportunityArea(input: DiagnosticFormValues, scores: ScoreBreakdown) {
+  const sector = input.sector.toLowerCase();
+  const priority = input.businessPriority;
+
+  if (priority === "Reducción de rotación" || priority === "Formación de líderes") {
+    return "Recursos Humanos";
+  }
+
+  if (priority === "Automatización administrativa") {
+    return "Administración y finanzas";
+  }
+
+  if (priority === "Cumplimiento y riesgo") {
+    return "Calidad y cumplimiento";
+  }
+
+  if (sector.includes("logística")) {
+    return "Logística";
+  }
+
+  if (
+    [
+      "manufactura",
+      "automotriz",
+      "metalmecánica",
+      "alimentos",
+      "agroindustria",
+      "energía",
+      "minería",
+      "aeroespacial",
+    ].some((token) => sector.includes(token))
+  ) {
+    if (scores.dimensionScores.process < 65) {
+      return "Calidad y cumplimiento";
+    }
+
+    if (priority === "Eficiencia operativa" || priority === "Productividad") {
+      return "Operaciones";
+    }
+
+    return "Mantenimiento";
+  }
+
+  if (sector.includes("retail") || sector.includes("turismo")) {
+    return "Comercial y servicio";
+  }
+
+  if (
+    sector.includes("servicios empresariales") ||
+    sector.includes("tecnología") ||
+    sector.includes("software") ||
+    sector.includes("universidades") ||
+    sector.includes("gobierno") ||
+    sector.includes("servicios financieros")
+  ) {
+    if (priority === "Productividad") {
+      return "Administración y finanzas";
+    }
+
+    return "Recursos Humanos";
+  }
+
+  if (sector.includes("salud")) {
+    return priority === "Cumplimiento y riesgo"
+      ? "Calidad y cumplimiento"
+      : "Operaciones";
+  }
+
+  return priority === "Eficiencia operativa" ? "Operaciones" : "Recursos Humanos";
+}
+
+function buildOpportunityRecommendation(
+  input: DiagnosticFormValues,
+  scores: ScoreBreakdown,
+): OpportunityRecommendation {
+  const area = inferOpportunityArea(input, scores);
+  const guide =
+    OPPORTUNITY_GUIDE.find((item) => item.area === area) ?? OPPORTUNITY_GUIDE[0];
+
+  return {
+    area: guide.area,
+    rationale: `Por el sector ${input.sector.toLowerCase()} y la prioridad declarada de ${input.businessPriority.toLowerCase()}, ${guide.area.toLowerCase()} suele concentrar oportunidades tempranas con impacto visible, menor fricción de adopción y casos fáciles de traducir a una primera ruta de capacitación.`,
+    examples: [...guide.examples],
+  };
+}
+
+function buildStrengths(
+  input: DiagnosticFormValues,
+  scores: ScoreBreakdown,
+  opportunityRecommendation: OpportunityRecommendation,
+) {
   const strengths = topStrengths(scores);
 
   const items: string[] = strengths.map((dimension) => {
@@ -112,7 +209,7 @@ function buildStrengths(input: DiagnosticFormValues, scores: ScoreBreakdown) {
   });
 
   items.push(
-    `El mayor potencial declarado en ${input.aiOpportunityArea.toLowerCase()} puede convertirse en una prioridad concreta para activar pilotos con sentido de negocio.`,
+    `La mejor área para empezar hoy apunta a ${opportunityRecommendation.area.toLowerCase()}, lo que da una base concreta para activar pilotos con sentido de negocio.`,
   );
 
   return items.slice(0, 3);
@@ -167,7 +264,11 @@ function buildRisks(scores: ScoreBreakdown) {
   return risks.slice(0, 3);
 }
 
-function buildRoadmap(input: DiagnosticFormValues, scores: ScoreBreakdown): RoadmapPhase[] {
+function buildRoadmap(
+  input: DiagnosticFormValues,
+  scores: ScoreBreakdown,
+  opportunityRecommendation: OpportunityRecommendation,
+): RoadmapPhase[] {
   const weakest = topGaps(scores);
   const needsGovernance = scores.dimensionScores.governance < 60;
 
@@ -182,7 +283,7 @@ function buildRoadmap(input: DiagnosticFormValues, scores: ScoreBreakdown): Road
   }
 
   const phase180 = [
-    `Lanzar pilotos guiados en ${input.aiOpportunityArea.toLowerCase()} con medición de tiempo, calidad y riesgo.`,
+    `Lanzar pilotos guiados en ${opportunityRecommendation.area.toLowerCase()} con medición de tiempo, calidad y riesgo.`,
     "Capacitar a líderes y mandos medios en adopción, prompts, criterio humano y supervisión.",
     "Diseñar rutas de aprendizaje diferenciadas para líderes, personal administrativo y equipos de soporte.",
   ];
@@ -240,6 +341,7 @@ function buildRuleBasedReport(
   input: DiagnosticFormValues,
   scores: ScoreBreakdown,
 ): GeneratedReport {
+  const opportunityRecommendation = buildOpportunityRecommendation(input, scores);
   const dimensionInsights = {
     strategy: getDimensionInsight("strategy", scores.dimensionAverages.strategy, input),
     talent: getDimensionInsight("talent", scores.dimensionAverages.talent, input),
@@ -255,11 +357,12 @@ function buildRuleBasedReport(
     aiMode: "rules",
     summary: buildSummary(input, scores),
     businessImpact: buildBusinessImpact(input, scores),
-    strengths: buildStrengths(input, scores),
+    strengths: buildStrengths(input, scores, opportunityRecommendation),
     priorityGaps: buildPriorityGaps(input, scores),
     risks: buildRisks(scores),
     dimensionInsights,
-    roadmap: buildRoadmap(input, scores),
+    opportunityRecommendation,
+    roadmap: buildRoadmap(input, scores, opportunityRecommendation),
     trainingRecommendation: buildTrainingRecommendation(input, scores),
   };
 }
@@ -383,6 +486,14 @@ export async function generateReport(
 ): Promise<GeneratedReport> {
   const fallbackReport = buildRuleBasedReport(input, scores);
   return maybeEnhanceSummaryWithAI(input, scores, fallbackReport);
+}
+
+export function getOpportunityRecommendation(
+  input: DiagnosticFormValues,
+  scores: ScoreBreakdown,
+  report?: GeneratedReport,
+) {
+  return report?.opportunityRecommendation ?? buildOpportunityRecommendation(input, scores);
 }
 
 export function buildDimensionNarrative(scores: ScoreBreakdown, dimension: DimensionKey) {

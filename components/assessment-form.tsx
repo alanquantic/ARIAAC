@@ -16,7 +16,7 @@ import {
   COMPANY_SIZES,
   DIAGNOSTIC_SECTIONS,
   MAIN_CONCERNS,
-  OPPORTUNITY_AREAS,
+  OPPORTUNITY_GUIDE,
   QUESTION_IDS,
   SCALE_OPTIONS,
   SECTORS,
@@ -98,7 +98,6 @@ export function AssessmentForm() {
       companySize: "",
       region: "",
       businessPriority: "",
-      aiOpportunityArea: "",
       mainConcern: "",
     },
   });
@@ -311,14 +310,6 @@ export function AssessmentForm() {
                   options={BUSINESS_PRIORITIES}
                 />
                 <SelectField
-                  id="aiOpportunityArea"
-                  label="Área con mayor potencial para IA"
-                  placeholder="Selecciona un área"
-                  error={errors.aiOpportunityArea?.message}
-                  registration={register("aiOpportunityArea")}
-                  options={OPPORTUNITY_AREAS}
-                />
-                <SelectField
                   id="mainConcern"
                   label="Principal preocupación frente a la IA"
                   placeholder="Selecciona una preocupación"
@@ -326,6 +317,40 @@ export function AssessmentForm() {
                   registration={register("mainConcern")}
                   options={MAIN_CONCERNS}
                 />
+              </div>
+
+              <div className="mt-8 rounded-[28px] border border-[rgba(245,158,11,0.16)] bg-[var(--card-strong)] px-5 py-5">
+                <p className="eyebrow">Guía rápida</p>
+                <h3 className="mt-3 text-xl font-semibold text-[var(--navy)]">
+                  Si hoy no tienes claro dónde podría aparecer valor con IA
+                </h3>
+                <p className="mt-2 text-sm leading-7 text-[var(--ink-soft)]">
+                  No necesitas responder un área específica para continuar. El
+                  reporte te sugerirá una prioridad inicial, y esta guía solo te
+                  ayuda a visualizar dónde suele aparecer valor primero.
+                </p>
+
+                <div className="mt-5 grid gap-3 md:grid-cols-2">
+                  {OPPORTUNITY_GUIDE.map((item) => (
+                    <article
+                      key={item.area}
+                      className="rounded-[22px] border border-[var(--line)] bg-white px-4 py-4"
+                    >
+                      <h4 className="text-base font-semibold text-[var(--navy)]">
+                        {item.area}
+                      </h4>
+                      <p className="mt-2 text-sm leading-7 text-[var(--ink-soft)]">
+                        {item.fit}
+                      </p>
+                      <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--amber-deep)]">
+                        Ejemplos
+                      </p>
+                      <p className="mt-2 text-sm leading-7 text-[var(--ink-soft)]">
+                        {item.examples.join(" · ")}
+                      </p>
+                    </article>
+                  ))}
+                </div>
               </div>
             </section>
 

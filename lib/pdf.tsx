@@ -8,6 +8,7 @@ import {
 } from "@react-pdf/renderer";
 
 import { DIMENSION_LABELS } from "@/lib/constants";
+import { getOpportunityRecommendation } from "@/lib/report";
 import { SubmissionRecord } from "@/lib/types";
 
 const styles = StyleSheet.create({
@@ -136,6 +137,7 @@ function BulletList({ items }: { items: string[] }) {
 
 function DiagnosticPdf({ submission }: { submission: SubmissionRecord }) {
   const { input, scores, report } = submission;
+  const opportunityRecommendation = getOpportunityRecommendation(input, scores, report);
 
   return (
     <Document
@@ -184,6 +186,20 @@ function DiagnosticPdf({ submission }: { submission: SubmissionRecord }) {
               <Text style={styles.body}>{input.businessPriority}</Text>
             </View>
           </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Área sugerida para empezar</Text>
+          <Text style={[styles.body, { fontWeight: 700 }]}>
+            {opportunityRecommendation.area}
+          </Text>
+          <Text style={[styles.body, { marginTop: 6 }]}>
+            {opportunityRecommendation.rationale}
+          </Text>
+          <Text style={[styles.body, { marginTop: 8, fontWeight: 700 }]}>
+            Ejemplos de aplicación
+          </Text>
+          <BulletList items={opportunityRecommendation.examples} />
         </View>
 
         <View style={styles.footer}>

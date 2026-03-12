@@ -22,7 +22,6 @@ export const diagnosticFormSchema = z.object({
   companySize: textField,
   region: textField,
   businessPriority: textField,
-  aiOpportunityArea: textField,
   mainConcern: textField,
   q1: scoreField,
   q2: scoreField,

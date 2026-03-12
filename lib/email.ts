@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 
+import { getOpportunityRecommendation } from "@/lib/report";
 import { SubmissionRecord } from "@/lib/types";
 import { formatDate, slugify } from "@/lib/utils";
 
@@ -14,6 +15,7 @@ function escapeHtml(value: string) {
 
 function buildEmailHtml(submission: SubmissionRecord, resultUrl: string, pdfUrl: string) {
   const { input, scores, report } = submission;
+  const opportunityRecommendation = getOpportunityRecommendation(input, scores, report);
 
   return `
     <div style="background:#f6f1e7;padding:32px 16px;font-family:'Helvetica Neue',Arial,sans-serif;color:#132230;">
@@ -54,6 +56,14 @@ function buildEmailHtml(submission: SubmissionRecord, resultUrl: string, pdfUrl:
             </ul>
           </div>
 
+          <div style="margin:0 0 20px;background:#f8fafc;border:1px solid rgba(15,23,42,0.08);border-radius:20px;padding:16px;">
+            <div style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#475569;">Área sugerida para empezar</div>
+            <div style="margin-top:8px;font-size:20px;font-weight:700;color:#0f172a;">${escapeHtml(opportunityRecommendation.area)}</div>
+            <p style="margin:10px 0 0;font-size:14px;line-height:1.7;color:#465467;">
+              ${escapeHtml(opportunityRecommendation.rationale)}
+            </p>
+          </div>
+
           <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:26px;">
             <a href="${resultUrl}" style="display:inline-block;background:#0f172a;color:#ffffff;padding:14px 18px;border-radius:999px;text-decoration:none;font-weight:700;">Ver resultado online</a>
             <a href="${pdfUrl}" style="display:inline-block;background:#f59e0b;color:#0f172a;padding:14px 18px;border-radius:999px;text-decoration:none;font-weight:700;">Descargar PDF</a>
@@ -70,6 +80,7 @@ function buildEmailHtml(submission: SubmissionRecord, resultUrl: string, pdfUrl:
 
 function buildEmailText(submission: SubmissionRecord, resultUrl: string, pdfUrl: string) {
   const { input, scores, report } = submission;
+  const opportunityRecommendation = getOpportunityRecommendation(input, scores, report);
 
   return [
     `Hola ${input.name},`,
@@ -79,6 +90,9 @@ function buildEmailText(submission: SubmissionRecord, resultUrl: string, pdfUrl:
     `Score general: ${scores.overallScore}/100`,
     "",
     report.summary,
+    "",
+    `Área sugerida para empezar: ${opportunityRecommendation.area}`,
+    opportunityRecommendation.rationale,
     "",
     "Fortalezas destacadas:",
     ...report.strengths.map((item) => `- ${item}`),
