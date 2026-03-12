@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AARIAC Diagnostico IA para RH
 
-## Getting Started
+Aplicacion web para evaluar que tan preparada esta una empresa para capacitar talento en IA, con foco en lideres de Recursos Humanos y organizaciones industriales.
 
-First, run the development server:
+## Incluye
+
+- landing page comercial
+- diagnostico con 12 preguntas en escala de 1 a 5
+- scoring por dimension y nivel de madurez
+- generacion de reporte ejecutivo
+- descarga de PDF
+- almacenamiento local en desarrollo y soporte para Vercel Blob en produccion
+- envio de correo transaccional con Resend
+- panel simple de seguimiento en `/admin`
+
+## Ejecutar en local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+La app queda disponible en [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables opcionales
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Puedes agregar un archivo `.env.local` si quieres personalizar el comportamiento:
 
-## Learn More
+```bash
+OPENAI_API_KEY=
+OPENAI_MODEL=
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+RESEND_API_KEY=
+RESEND_FROM="AARIAC Diagnostico <noreply@updates.ceoslogica.com>"
+RESEND_REPLY_TO=
+RESEND_ADMIN_TO=
+BLOB_READ_WRITE_TOKEN=
+```
 
-To learn more about Next.js, take a look at the following resources:
+Si no defines esas variables, la app funciona con un motor de recomendaciones basado en reglas.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Para montarlo en Vercel:
 
-## Deploy on Vercel
+1. Importa el repositorio.
+2. Agrega estas variables de entorno:
+   - `NEXT_PUBLIC_APP_URL`
+   - `RESEND_API_KEY`
+   - `RESEND_FROM`
+   - `RESEND_REPLY_TO` opcional
+   - `RESEND_ADMIN_TO` opcional
+   - `BLOB_READ_WRITE_TOKEN` para persistencia real
+3. En local la app guarda en archivo. En Vercel, si agregas `BLOB_READ_WRITE_TOKEN`, cambia automaticamente a Vercel Blob.
+4. Si no configuras Blob en Vercel, la app puede desplegar, pero la persistencia de respuestas no sera confiable entre ejecuciones.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Rutas principales
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/` landing principal
+- `/diagnostico` formulario completo
+- `/resultado/[id]` reporte individual
+- `/admin` lista de envios guardados
+
+## Notas del MVP
+
+- El envio de correo se dispara al guardar un diagnostico y usa links absolutos a resultado y PDF.
+- La persistencia esta implementada con fallback local para desarrollo y Blob para produccion en Vercel.
+- Para una siguiente fase conviene agregar autenticacion al panel admin.
