@@ -29,6 +29,8 @@ Puedes agregar un archivo `.env.local` si quieres personalizar el comportamiento
 ```bash
 OPENAI_API_KEY=
 OPENAI_MODEL=
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.5-flash
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 RESEND_API_KEY=
 RESEND_FROM="AARIAC Diagnostico <noreply@updates.ceoslogica.com>"
@@ -38,6 +40,7 @@ BLOB_READ_WRITE_TOKEN=
 ```
 
 Si no defines esas variables, la app funciona con un motor de recomendaciones basado en reglas.
+Si defines `GEMINI_API_KEY`, la app puede reescribir el resumen ejecutivo y el impacto de negocio con Gemini.
 
 ## Vercel
 
@@ -48,6 +51,8 @@ Para montarlo en Vercel:
    - `NEXT_PUBLIC_APP_URL`
    - `RESEND_API_KEY`
    - `RESEND_FROM`
+   - `GEMINI_API_KEY` opcional
+   - `GEMINI_MODEL` opcional
    - `RESEND_REPLY_TO` opcional
    - `RESEND_ADMIN_TO` opcional
    - `BLOB_READ_WRITE_TOKEN` para persistencia real

@@ -78,7 +78,7 @@ export interface TrainingRecommendation {
 }
 
 export interface GeneratedReport {
-  aiMode: "rules" | "openai-assisted";
+  aiMode: "rules" | "openai-assisted" | "gemini-assisted";
   summary: string;
   businessImpact: string;
   strengths: string[];

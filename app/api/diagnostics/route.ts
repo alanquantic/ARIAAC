@@ -31,7 +31,8 @@ export async function POST(request: Request) {
       pdfUrl: `/api/diagnostics/${submission.id}/pdf`,
       emailSent: emailStatus.sent,
     });
-  } catch {
+  } catch (error) {
+    console.error("diagnostic_submit_error", error);
     return NextResponse.json(
       { error: "Ocurrio un problema al guardar el diagnostico." },
       { status: 500 },

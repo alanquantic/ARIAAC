@@ -269,8 +269,79 @@ async function maybeEnhanceSummaryWithAI(
   scores: ScoreBreakdown,
   fallbackReport: GeneratedReport,
 ): Promise<GeneratedReport> {
+  const geminiApiKey = process.env.GEMINI_API_KEY;
+  const geminiModel = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
   const apiKey = process.env.OPENAI_API_KEY;
   const model = process.env.OPENAI_MODEL;
+  const prompt = [
+    "Reescribe el resumen ejecutivo y el impacto de negocio de este diagnostico.",
+    "Mantener tono ejecutivo, concreto y en espanol.",
+    "No inventar datos.",
+    `Empresa: ${input.company}`,
+    `Sector: ${input.sector}`,
+    `Prioridad: ${input.businessPriority}`,
+    `Nivel: ${scores.maturityLevel}`,
+    `Score general: ${scores.overallScore}`,
+    `Resumen base: ${fallbackReport.summary}`,
+    `Impacto base: ${fallbackReport.businessImpact}`,
+    "Devuelve exactamente dos parrafos separados por una linea en blanco.",
+  ].join("\n");
+
+  if (geminiApiKey) {
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${geminiApiKey}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            contents: [
+              {
+                role: "user",
+                parts: [{ text: prompt }],
+              },
+            ],
+            generationConfig: {
+              temperature: 0.4,
+            },
+          }),
+        },
+      );
+
+      if (response.ok) {
+        const json = (await response.json()) as {
+          candidates?: Array<{
+            content?: {
+              parts?: Array<{ text?: string }>;
+            };
+          }>;
+        };
+
+        const content = json.candidates?.[0]?.content?.parts
+          ?.map((part) => part.text ?? "")
+          .join("\n")
+          .trim();
+
+        if (content) {
+          const [summary, businessImpact] = content
+            .split(/\n\s*\n/)
+            .map((block) => block.trim())
+            .filter(Boolean);
+
+          return {
+            ...fallbackReport,
+            aiMode: "gemini-assisted" as const,
+            summary: summary ?? fallbackReport.summary,
+            businessImpact: businessImpact ?? fallbackReport.businessImpact,
+          };
+        }
+      }
+    } catch {
+      // Fall through to OpenAI or rules-based output.
+    }
+  }
 
   if (!apiKey || !model) {
     return fallbackReport;
@@ -278,20 +349,6 @@ async function maybeEnhanceSummaryWithAI(
 
   try {
     const client = new OpenAI({ apiKey });
-
-    const prompt = [
-      "Reescribe el resumen ejecutivo y el impacto de negocio de este diagnostico.",
-      "Mantener tono ejecutivo, concreto y en espanol.",
-      "No inventar datos.",
-      `Empresa: ${input.company}`,
-      `Sector: ${input.sector}`,
-      `Prioridad: ${input.businessPriority}`,
-      `Nivel: ${scores.maturityLevel}`,
-      `Score general: ${scores.overallScore}`,
-      `Resumen base: ${fallbackReport.summary}`,
-      `Impacto base: ${fallbackReport.businessImpact}`,
-      "Devuelve exactamente dos parrafos separados por una linea en blanco.",
-    ].join("\n");
 
     const response = await client.responses.create({
       model,
