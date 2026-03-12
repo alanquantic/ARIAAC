@@ -36,7 +36,7 @@ export function ResultDashboard({ submission }: { submission: SubmissionRecord }
             className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--ink-soft)] transition hover:text-[var(--navy)]"
           >
             <ArrowLeft className="h-4 w-4" />
-            Hacer otro diagnostico
+            Hacer otro diagnóstico
           </Link>
 
           <section className="mt-5 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
@@ -63,7 +63,7 @@ export function ResultDashboard({ submission }: { submission: SubmissionRecord }
                 <div className="max-w-2xl">
                   <p className="eyebrow">Reporte ejecutivo para {input.company}</p>
                   <h2 className="display-title mt-4 text-4xl font-semibold text-[var(--navy)] md:text-5xl">
-                    Diagnostico de preparacion para capacitar talento en IA
+                    Diagnóstico de preparación para capacitar talento en IA
                   </h2>
                   <p className="mt-4 text-base leading-8 text-[var(--ink-soft)]">
                     {report.summary}
@@ -81,12 +81,6 @@ export function ResultDashboard({ submission }: { submission: SubmissionRecord }
                     <Download className="h-4 w-4" />
                     Descargar PDF
                   </a>
-                  <Link
-                    href="/admin"
-                    className="inline-flex items-center justify-center rounded-full border border-[var(--line)] px-5 py-3 text-sm font-semibold text-[var(--navy)] transition hover:bg-white"
-                  >
-                    Ver panel admin
-                  </Link>
                 </div>
               </div>
 
@@ -116,12 +110,12 @@ export function ResultDashboard({ submission }: { submission: SubmissionRecord }
 
         <section className="mt-6 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="surface-panel px-5 py-6 md:px-6">
-            <div className="flex items-center gap-3">
-              <Gauge className="h-5 w-5 text-[var(--amber-deep)]" />
-              <h2 className="text-2xl font-semibold text-[var(--navy)]">
-                Resultado por dimension
-              </h2>
-            </div>
+              <div className="flex items-center gap-3">
+                <Gauge className="h-5 w-5 text-[var(--amber-deep)]" />
+                <h2 className="text-2xl font-semibold text-[var(--navy)]">
+                  Resultado por dimensión
+                </h2>
+              </div>
 
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               {Object.entries(scores.dimensionScores).map(([key, score]) => (
@@ -238,7 +232,7 @@ export function ResultDashboard({ submission }: { submission: SubmissionRecord }
         <section className="mt-6">
           <div className="glow-card px-5 py-6 md:px-6">
             <h2 className="text-2xl font-semibold text-[var(--navy)]">
-              Enfoque de capacitacion recomendado
+              Enfoque de capacitación recomendado
             </h2>
             <p className="mt-4 text-base leading-8 text-[var(--ink-soft)]">
               {report.trainingRecommendation.headline}
@@ -247,7 +241,7 @@ export function ResultDashboard({ submission }: { submission: SubmissionRecord }
             <div className="mt-6 grid gap-4 md:grid-cols-2">
               <div className="rounded-[24px] border border-[var(--line)] bg-white px-5 py-5">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--ink-soft)]">
-                  Publicos sugeridos
+                  Públicos sugeridos
                 </p>
                 <div className="mt-4 space-y-3">
                   {report.trainingRecommendation.audiences.map((item) => (
@@ -262,7 +256,7 @@ export function ResultDashboard({ submission }: { submission: SubmissionRecord }
               </div>
               <div className="rounded-[24px] border border-[var(--line)] bg-white px-5 py-5">
                 <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--ink-soft)]">
-                  Modulos sugeridos
+                  Módulos sugeridos
                 </p>
                 <div className="mt-4 space-y-3">
                   {report.trainingRecommendation.modules.map((item) => (

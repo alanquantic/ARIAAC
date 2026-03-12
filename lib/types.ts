@@ -17,8 +17,8 @@ export type DimensionKey = "strategy" | "talent" | "process" | "governance";
 export type MaturityLevel =
   | "Inicial"
   | "Emergente"
-  | "En transicion"
-  | "Estrategico";
+  | "En transición"
+  | "Estratégico";
 
 export interface QuestionDefinition {
   id: QuestionId;

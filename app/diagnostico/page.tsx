@@ -1,7 +1,7 @@
 import { AssessmentForm } from "@/components/assessment-form";
 
 export const metadata = {
-  title: "Diagnostico | AARIAC",
+  title: "Diagnóstico | AARIAC",
 };
 
 export default function DiagnosticoPage() {

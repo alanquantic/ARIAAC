@@ -10,12 +10,12 @@ const textField = z
 
 const scoreField = z.coerce
   .number()
-  .min(1, "Selecciona una opcion del 1 al 5.")
-  .max(5, "Selecciona una opcion del 1 al 5.");
+  .min(1, "Selecciona una opción del 1 al 5.")
+  .max(5, "Selecciona una opción del 1 al 5.");
 
 export const diagnosticFormSchema = z.object({
   name: textField,
-  email: z.string().trim().email("Ingresa un correo valido."),
+  email: z.string().trim().email("Ingresa un correo válido."),
   company: textField,
   role: textField,
   sector: textField,

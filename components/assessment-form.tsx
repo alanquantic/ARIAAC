@@ -132,7 +132,7 @@ export function AssessmentForm() {
     };
 
     if (!response.ok || !payload.resultUrl) {
-      setServerError(payload.error ?? "No pudimos procesar el diagnostico.");
+      setServerError(payload.error ?? "No pudimos procesar el diagnóstico.");
       return;
     }
 
@@ -154,20 +154,20 @@ export function AssessmentForm() {
                 <ArrowLeft className="h-4 w-4" />
                 Volver al inicio
               </Link>
-              <p className="eyebrow mt-5">AARIAC / Diagnostico guiado</p>
+              <p className="eyebrow mt-5">AARIAC / Diagnóstico guiado</p>
               <h1 className="display-title mt-3 text-4xl font-semibold text-[var(--navy)] md:text-5xl">
-                Diagnostico de preparacion para capacitar talento en IA
+                Diagnóstico de preparación para capacitar talento en IA
               </h1>
               <p className="mt-4 text-base leading-8 text-[var(--ink-soft)]">
                 Responde en escala de 1 a 5. El resultado se traduce a un reporte
                 ejecutivo con brechas prioritarias, riesgos y una ruta sugerida para
-                RH y direccion.
+                RH y dirección.
               </p>
             </div>
 
             <aside className="glow-card w-full max-w-md px-5 py-5">
               <div className="flex items-center justify-between text-sm text-[var(--navy)]">
-                <span className="font-semibold">Avance del diagnostico</span>
+                <span className="font-semibold">Avance del diagnóstico</span>
                 <span className="font-mono">{progress}%</span>
               </div>
               <div className="mt-3 h-3 overflow-hidden rounded-full bg-[rgba(15,23,42,0.08)]">
@@ -203,11 +203,11 @@ export function AssessmentForm() {
                 <div>
                   <p className="eyebrow">Paso 1 / Contexto</p>
                   <h2 className="mt-3 text-2xl font-semibold text-[var(--navy)]">
-                    Personaliza tu diagnostico
+                    Comparte el contexto de tu organización
                   </h2>
                   <p className="mt-2 text-sm leading-7 text-[var(--ink-soft)]">
-                    Usaremos esta informacion para construir el reporte y guardar el
-                    envio.
+                    Usaremos esta información para personalizar tu diagnóstico y
+                    preparar el reporte.
                   </p>
                 </div>
                 <div className="rounded-2xl bg-[var(--card-strong)] p-3 text-[var(--amber-deep)]">
@@ -283,7 +283,7 @@ export function AssessmentForm() {
                 />
                 <SelectField
                   id="companySize"
-                  label="Numero de colaboradores"
+                  label="Número de colaboradores"
                   placeholder="Selecciona un rango"
                   error={errors.companySize?.message}
                   registration={register("companySize")}
@@ -291,20 +291,20 @@ export function AssessmentForm() {
                 />
                 <label className="block" htmlFor="region">
                   <span className="mb-2 block text-sm font-semibold text-[var(--navy)]">
-                    Estado o pais
+                    Estado o país
                   </span>
                   <input
                     id="region"
-                    aria-label="Estado o pais"
+                    aria-label="Estado o país"
                     {...register("region")}
                     className="w-full rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--amber)]"
-                    placeholder="Ej. Nuevo Leon, Mexico"
+                    placeholder="Ej. Nuevo León, México"
                   />
                   <FieldError message={errors.region?.message} />
                 </label>
                 <SelectField
                   id="businessPriority"
-                  label="Prioridad de negocio"
+                  label="Prioridad del negocio"
                   placeholder="Selecciona una prioridad"
                   error={errors.businessPriority?.message}
                   registration={register("businessPriority")}
@@ -312,16 +312,16 @@ export function AssessmentForm() {
                 />
                 <SelectField
                   id="aiOpportunityArea"
-                  label="Area con mayor potencial para IA"
-                  placeholder="Selecciona un area"
+                  label="Área con mayor potencial para IA"
+                  placeholder="Selecciona un área"
                   error={errors.aiOpportunityArea?.message}
                   registration={register("aiOpportunityArea")}
                   options={OPPORTUNITY_AREAS}
                 />
                 <SelectField
                   id="mainConcern"
-                  label="Principal preocupacion frente a IA"
-                  placeholder="Selecciona una preocupacion"
+                  label="Principal preocupación frente a la IA"
+                  placeholder="Selecciona una preocupación"
                   error={errors.mainConcern?.message}
                   registration={register("mainConcern")}
                   options={MAIN_CONCERNS}
@@ -405,15 +405,15 @@ export function AssessmentForm() {
             <section className="glow-card sticky top-6 px-5 py-6">
               <p className="eyebrow">Resultado esperado</p>
               <h2 className="mt-3 text-2xl font-semibold text-[var(--navy)]">
-                Lo que recibiras al enviar
+                Lo que recibirás al finalizar
               </h2>
 
               <div className="mt-5 space-y-3">
                 {[
                   "Score general y nivel de madurez",
-                  "Lectura ejecutiva de fortalezas y brechas",
+                  "Lectura ejecutiva de fortalezas y áreas de oportunidad",
                   "Riesgos de no actuar",
-                  "Ruta sugerida para 90 dias, 6 meses y 12 meses",
+                  "Ruta sugerida para 90 días, 6 meses y 12 meses",
                   "PDF descargable listo para compartir",
                 ].map((item) => (
                   <div

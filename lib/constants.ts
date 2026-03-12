@@ -10,13 +10,25 @@ export const SCALE_OPTIONS = [
 
 export const SECTORS = [
   "Manufactura",
-  "Logistica",
+  "Logística y transporte",
   "Automotriz",
-  "Metalmecanica",
+  "Metalmecánica",
   "Alimentos y bebidas",
-  "Energia",
-  "Construccion",
+  "Agroindustria",
+  "Energía y utilities",
+  "Construcción e infraestructura",
+  "Universidades y educación superior",
+  "Salud y hospitalario",
+  "Retail y comercio",
+  "Tecnología y software",
+  "Servicios financieros",
+  "Turismo y hotelería",
+  "Minería",
+  "Telecomunicaciones",
+  "Gobierno y sector público",
   "Servicios empresariales",
+  "Farmacéutica y biotecnología",
+  "Aeroespacial",
   "Otro",
 ];
 
@@ -29,17 +41,17 @@ export const COMPANY_SIZES = [
 
 export const BUSINESS_PRIORITIES = [
   "Productividad",
-  "Reduccion de rotacion",
+  "Reducción de rotación",
   "Eficiencia operativa",
-  "Formacion de lideres",
-  "Automatizacion administrativa",
+  "Formación de líderes",
+  "Automatización administrativa",
   "Cumplimiento y riesgo",
 ];
 
 export const OPPORTUNITY_AREAS = [
   "Recursos Humanos",
   "Operaciones",
-  "Logistica",
+  "Logística",
   "Compras",
   "Calidad",
   "Mantenimiento",
@@ -51,9 +63,9 @@ export const MAIN_CONCERNS = [
   "Falta de habilidades",
   "Resistencia al cambio",
   "Riesgos de seguridad",
-  "Falta de claridad estrategica",
+  "Falta de claridad estratégica",
   "Baja calidad de datos",
-  "No saber por donde empezar",
+  "No saber por dónde empezar",
 ];
 
 export const DIMENSION_LABELS = {
@@ -68,25 +80,25 @@ export const DIAGNOSTIC_SECTIONS: QuestionSection[] = [
     id: "strategy",
     title: "Estrategia y liderazgo",
     intro:
-      "Mide que tan alineada esta la direccion respecto al valor y al rumbo de la IA.",
+      "Evalúa qué tan clara y alineada está la dirección respecto al valor y al rumbo de la IA.",
     questions: [
       {
         id: "q1",
         dimension: "strategy",
         prompt:
-          "La direccion tiene una vision clara de como la IA puede impactar productividad, talento y competitividad.",
+          "La dirección tiene una visión clara de cómo la IA puede impactar la productividad, el talento y la competitividad.",
       },
       {
         id: "q2",
         dimension: "strategy",
         prompt:
-          "La empresa ya identifico procesos o areas donde la IA podria aportar valor real.",
+          "La empresa ya identificó procesos o áreas donde la IA podría aportar valor real.",
       },
       {
         id: "q3",
         dimension: "strategy",
         prompt:
-          "Existen responsables claros para impulsar iniciativas de IA y la capacitacion asociada.",
+          "Existen responsables claros para impulsar iniciativas de IA y la capacitación asociada.",
       },
     ],
   },
@@ -94,31 +106,31 @@ export const DIAGNOSTIC_SECTIONS: QuestionSection[] = [
     id: "talent",
     title: "Talento y cultura",
     intro:
-      "Evalua si la organizacion tiene apertura, recursos y cultura de aprendizaje para adoptar IA.",
+      "Evalúa si la organización tiene apertura, recursos y cultura de aprendizaje para adoptar IA.",
     questions: [
       {
         id: "q4",
         dimension: "talent",
         prompt:
-          "La empresa conoce que puestos y tareas podrian ser automatizados, asistidos o fortalecidos con IA.",
+          "La empresa conoce qué puestos y tareas podrían ser automatizados, asistidos o fortalecidos con IA.",
       },
       {
         id: "q5",
         dimension: "talent",
         prompt:
-          "Los lideres y mandos medios muestran apertura para adoptar nuevas herramientas digitales.",
+          "Los líderes y mandos medios muestran apertura para adoptar nuevas herramientas digitales.",
       },
       {
         id: "q6",
         dimension: "talent",
         prompt:
-          "Existe tiempo, presupuesto o disposicion real para capacitar al personal en habilidades relacionadas con IA.",
+          "Existe tiempo, presupuesto o disposición real para capacitar al personal en habilidades relacionadas con IA.",
       },
       {
         id: "q7",
         dimension: "talent",
         prompt:
-          "La organizacion promueve aprendizaje continuo, pensamiento analitico y adaptacion al cambio.",
+          "La organización promueve aprendizaje continuo, pensamiento analítico y adaptación al cambio.",
       },
     ],
   },
@@ -126,13 +138,13 @@ export const DIAGNOSTIC_SECTIONS: QuestionSection[] = [
     id: "process",
     title: "Procesos y datos",
     intro:
-      "Revisa si existen procesos y datos suficientemente solidos para que la capacitacion tenga impacto.",
+      "Revisa si existen procesos y datos suficientemente sólidos para que la capacitación tenga impacto.",
     questions: [
       {
         id: "q8",
         dimension: "process",
         prompt:
-          "Los procesos clave de la empresa estan suficientemente documentados y estandarizados.",
+          "Los procesos clave de la empresa están suficientemente documentados y estandarizados.",
       },
       {
         id: "q9",
@@ -144,7 +156,7 @@ export const DIAGNOSTIC_SECTIONS: QuestionSection[] = [
         id: "q10",
         dimension: "process",
         prompt:
-          "Las areas clave ya utilizan herramientas digitales de forma consistente en su trabajo diario.",
+          "Las áreas clave ya utilizan herramientas digitales de forma consistente en su trabajo diario.",
       },
     ],
   },
@@ -152,7 +164,7 @@ export const DIAGNOSTIC_SECTIONS: QuestionSection[] = [
     id: "governance",
     title: "Riesgo y gobernanza",
     intro:
-      "Confirma si la empresa puede incorporar IA sin perder trazabilidad, seguridad o supervision humana.",
+      "Confirma si la empresa puede incorporar IA sin perder trazabilidad, seguridad o supervisión humana.",
     questions: [
       {
         id: "q11",
@@ -164,7 +176,7 @@ export const DIAGNOSTIC_SECTIONS: QuestionSection[] = [
         id: "q12",
         dimension: "governance",
         prompt:
-          "Aunque se use IA como apoyo, las decisiones relevantes mantendrian supervision humana.",
+          "Aunque se use IA como apoyo, las decisiones relevantes mantendrían supervisión humana.",
       },
     ],
   },
@@ -176,11 +188,11 @@ export const QUESTION_IDS = DIAGNOSTIC_SECTIONS.flatMap((section) =>
 
 export const MATURITY_DESCRIPTIONS = {
   Inicial:
-    "La empresa reconoce la relevancia de la IA, pero todavia no cuenta con bases suficientes para impulsar una capacitacion efectiva.",
+    "La empresa reconoce la relevancia de la IA, pero todavía no cuenta con bases suficientes para impulsar una capacitación efectiva.",
   Emergente:
-    "Existen señales de interes y algunas capacidades aisladas, aunque todavia hay brechas que limitan una adopcion ordenada.",
-  "En transicion":
-    "La organizacion ya tiene condiciones relevantes para avanzar, pero necesita priorizar, formalizar y acelerar la ruta de talento.",
-  Estrategico:
-    "La empresa muestra una preparacion alta para escalar capacitacion en IA con foco en valor, trazabilidad y adopcion transversal.",
+    "Existen señales de interés y algunas capacidades aisladas, aunque todavía hay brechas que limitan una adopción ordenada.",
+  "En transición":
+    "La organización ya tiene condiciones relevantes para avanzar, pero necesita priorizar, formalizar y acelerar la ruta de talento.",
+  Estratégico:
+    "La empresa muestra una preparación alta para escalar capacitación en IA con foco en valor, trazabilidad y adopción transversal.",
 } as const;

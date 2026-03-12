@@ -32,13 +32,13 @@ export function AdminDashboard({
 
           <div className="mt-5 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
-              <p className="eyebrow">AARIAC / Panel de envios</p>
+              <p className="eyebrow">AARIAC / Panel de envíos</p>
               <h1 className="display-title mt-4 text-4xl font-semibold text-[var(--navy)] md:text-5xl">
-                Seguimiento simple de diagnosticos guardados
+                Seguimiento simple de diagnósticos guardados
               </h1>
               <p className="mt-4 max-w-2xl text-base leading-8 text-[var(--ink-soft)]">
-                Esta vista sirve como tablero MVP para revisar prospectos,
-                interpretar resultados y abrir conversaciones comerciales.
+                Esta vista sirve para revisar envíos, interpretar resultados y dar
+                seguimiento a las conversaciones comerciales.
               </p>
             </div>
 
@@ -94,7 +94,7 @@ export function AdminDashboard({
                       <th className="px-5 py-4 font-semibold">Sector</th>
                       <th className="px-5 py-4 font-semibold">Nivel</th>
                       <th className="px-5 py-4 font-semibold">Score</th>
-                      <th className="px-5 py-4 font-semibold">Accion</th>
+                      <th className="px-5 py-4 font-semibold">Acción</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -139,12 +139,12 @@ export function AdminDashboard({
               </div>
             ) : (
               <div className="px-6 py-16 text-center">
-                <p className="eyebrow">Sin envios aun</p>
+                <p className="eyebrow">Sin envíos aún</p>
                 <h2 className="display-title mt-4 text-4xl font-semibold text-[var(--navy)]">
-                  El panel esta listo para recibir respuestas
+                  El panel está listo para recibir respuestas
                 </h2>
                 <p className="mt-4 text-base leading-8 text-[var(--ink-soft)]">
-                  En cuanto completes el primer diagnostico, aqui apareceran los
+                  En cuanto completes el primer diagnóstico, aquí aparecerán los
                   resultados guardados.
                 </p>
                 <div className="mt-8">
@@ -152,7 +152,7 @@ export function AdminDashboard({
                     href="/diagnostico"
                     className="inline-flex rounded-full bg-[var(--navy)] px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5"
                   >
-                    Crear primer diagnostico
+                    Crear primer diagnóstico
                   </Link>
                 </div>
               </div>

@@ -19,8 +19,8 @@ function buildEmailHtml(submission: SubmissionRecord, resultUrl: string, pdfUrl:
     <div style="background:#f6f1e7;padding:32px 16px;font-family:'Helvetica Neue',Arial,sans-serif;color:#132230;">
       <div style="max-width:640px;margin:0 auto;background:#fffdfa;border:1px solid rgba(15,23,42,0.08);border-radius:28px;overflow:hidden;">
         <div style="background:#0f172a;padding:28px 28px 20px;color:#f8fafc;">
-          <p style="margin:0 0 10px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#f59e0b;">AARIAC / Diagnostico IA</p>
-          <h1 style="margin:0;font-size:32px;line-height:1.05;">Tu reporte ya esta listo</h1>
+          <p style="margin:0 0 10px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#f59e0b;">AARIAC / Diagnóstico IA</p>
+          <h1 style="margin:0;font-size:32px;line-height:1.05;">Tu reporte ya está listo</h1>
           <p style="margin:14px 0 0;font-size:15px;line-height:1.7;color:#cbd5e1;">
             ${escapeHtml(input.company)} obtuvo un nivel ${escapeHtml(scores.maturityLevel)} con un score general de ${scores.overallScore}/100.
           </p>
@@ -28,7 +28,7 @@ function buildEmailHtml(submission: SubmissionRecord, resultUrl: string, pdfUrl:
 
         <div style="padding:28px;">
           <p style="margin:0 0 14px;font-size:15px;line-height:1.8;color:#465467;">
-            Hola ${escapeHtml(input.name)}, gracias por completar el diagnostico de preparacion para capacitar talento en IA.
+            Hola ${escapeHtml(input.name)}, gracias por completar el diagnóstico de preparación para capacitar talento en IA.
           </p>
           <p style="margin:0 0 18px;font-size:15px;line-height:1.8;color:#465467;">
             ${escapeHtml(report.summary)}
@@ -60,7 +60,7 @@ function buildEmailHtml(submission: SubmissionRecord, resultUrl: string, pdfUrl:
           </div>
 
           <p style="margin:24px 0 0;font-size:13px;line-height:1.7;color:#64748b;">
-            Fecha de generacion: ${escapeHtml(formatDate(submission.createdAt))}. Si quieres profundizar el reporte, este correo puede servir como punto de partida para una sesion de interpretacion.
+            Fecha de generación: ${escapeHtml(formatDate(submission.createdAt))}. Si deseas profundizar el reporte, este correo puede servir como punto de partida para una sesión de interpretación.
           </p>
         </div>
       </div>
@@ -74,7 +74,7 @@ function buildEmailText(submission: SubmissionRecord, resultUrl: string, pdfUrl:
   return [
     `Hola ${input.name},`,
     "",
-    `Tu diagnostico para ${input.company} ya esta listo.`,
+    `Tu diagnóstico para ${input.company} ya está listo.`,
     `Nivel: ${scores.maturityLevel}`,
     `Score general: ${scores.overallScore}/100`,
     "",
@@ -101,12 +101,12 @@ export async function sendDiagnosticEmail(
   const resend = new Resend(apiKey);
   const from =
     process.env.RESEND_FROM ??
-    "AARIAC Diagnostico <noreply@updates.ceoslogica.com>";
+    "AARIAC Diagnóstico <noreply@updates.ceoslogica.com>";
   const replyTo = process.env.RESEND_REPLY_TO;
   const adminTo = process.env.RESEND_ADMIN_TO;
   const resultUrl = `${baseUrl}/resultado/${submission.id}`;
   const pdfUrl = `${baseUrl}/api/diagnostics/${submission.id}/pdf`;
-  const subject = `Tu diagnostico de IA para ${submission.input.company}`;
+  const subject = `Tu diagnóstico de IA para ${submission.input.company}`;
 
   const { error } = await resend.emails.send({
     from,

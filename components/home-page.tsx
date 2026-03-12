@@ -8,41 +8,34 @@ import {
   ShieldCheck,
 } from "lucide-react";
 
+import { SECTORS } from "@/lib/constants";
+
 const outcomes = [
   {
-    title: "Diagnostico serio, no un quiz generico",
+    title: "Diagnóstico serio, no un test genérico",
     description:
       "Mide estrategia, talento, procesos y gobernanza para traducir la IA a decisiones de RH y de negocio.",
     icon: ClipboardList,
   },
   {
-    title: "Lenguaje aterrizado a RH industrial",
+    title: "Lenguaje claro para RH y dirección",
     description:
-      "El reporte habla de productividad, liderazgo, adopcion, supervision humana y familias de puestos.",
+      "El reporte habla de productividad, liderazgo, adopción, supervisión humana y familias de puestos.",
     icon: Factory,
   },
   {
     title: "Reporte ejecutivo listo para compartir",
     description:
-      "Obtienes hallazgos, riesgos, prioridades y una ruta sugerida para 90 dias, 6 meses y 12 meses.",
+      "Obtienes hallazgos, riesgos, prioridades y una ruta sugerida para 90 días, 6 meses y 12 meses.",
     icon: Building2,
   },
 ];
 
 const proofPoints = [
   "12 preguntas",
-  "4 dimensiones criticas",
+  "4 dimensiones críticas",
   "5 a 7 minutos",
   "PDF descargable",
-];
-
-const sectors = [
-  "Manufactura",
-  "Automotriz",
-  "Logistica",
-  "Metalmecanica",
-  "Alimentos y bebidas",
-  "Energia",
 ];
 
 export function HomePage() {
@@ -53,37 +46,29 @@ export function HomePage() {
           <div>
             <p className="eyebrow">AARIAC / RH + IA</p>
             <p className="mt-1 text-sm font-medium text-[var(--ink-soft)]">
-              Diagnostico ejecutivo para empresas industriales
+              Diagnóstico ejecutivo para organizaciones y empresas
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/admin"
-              className="hidden rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold text-[var(--navy)] transition hover:bg-white md:inline-flex"
-            >
-              Panel admin
-            </Link>
-            <Link
-              href="/diagnostico"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--navy)] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
-            >
-              Iniciar diagnostico
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+          <Link
+            href="/diagnostico"
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--navy)] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+          >
+            Iniciar diagnóstico
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </header>
 
         <section className="grid gap-6 pt-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-stretch">
           <div className="surface-panel overflow-hidden px-6 py-8 md:px-8 md:py-10">
             <div className="max-w-3xl">
-              <p className="eyebrow">Capacitacion en IA con criterio de negocio</p>
+              <p className="eyebrow">Capacitación en IA con criterio de negocio</p>
               <h1 className="display-title mt-4 text-5xl font-semibold leading-[0.95] text-[var(--navy)] md:text-7xl">
-                Evalua que tan preparada esta tu empresa para formar talento en IA
+                Evalúa qué tan preparada está tu organización para formar talento en IA
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--ink-soft)] md:text-xl">
                 Responde unas cuantas preguntas y recibe un reporte ejecutivo con
-                nivel de madurez, brechas criticas, riesgos de no actuar y una ruta
-                sugerida para Recursos Humanos y direccion.
+                nivel de madurez, brechas críticas, riesgos de no actuar y una ruta
+                sugerida para Recursos Humanos, liderazgo y dirección.
               </p>
             </div>
 
@@ -103,14 +88,14 @@ export function HomePage() {
                 href="/diagnostico"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--amber)] px-6 py-4 text-sm font-semibold text-[var(--navy)] transition hover:-translate-y-0.5"
               >
-                Quiero mi diagnostico
+                Quiero mi diagnóstico
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="#como-funciona"
                 className="inline-flex items-center justify-center rounded-full border border-[var(--line)] px-6 py-4 text-sm font-semibold text-[var(--navy)] transition hover:bg-white"
               >
-                Ver como funciona
+                Ver cómo funciona
               </a>
             </div>
           </div>
@@ -120,7 +105,7 @@ export function HomePage() {
               <div>
                 <p className="eyebrow">Lo que obtienes</p>
                 <h2 className="display-title mt-3 text-3xl font-semibold text-[var(--navy)]">
-                  Un reporte listo para mover conversaciones internas
+                  Un reporte claro para conversar con dirección y RH
                 </h2>
               </div>
               <div className="rounded-2xl bg-[var(--navy)] p-3 text-white">
@@ -162,13 +147,13 @@ export function HomePage() {
           <div className="surface-panel px-6 py-8 md:px-8">
             <p className="eyebrow">Pensado para RH</p>
             <h2 className="display-title mt-4 text-4xl font-semibold text-[var(--navy)]">
-              Diagnostico de preparacion, no solo de curiosidad
+              Diagnóstico de preparación, no solo de interés
             </h2>
             <p className="mt-4 text-base leading-8 text-[var(--ink-soft)]">
-              La herramienta mide si la organizacion tiene las condiciones para
-              capacitar bien, escalar con orden y proteger decisiones asistidas por
-              IA. Eso hace que el resultado sea util para RH, direccion y areas
-              operativas.
+              La herramienta mide si la organización tiene las condiciones para
+              capacitar bien, adoptar con orden y mantener supervisión humana en
+              decisiones apoyadas por IA. Eso hace que el resultado sea útil para RH,
+              dirección y áreas operativas.
             </p>
 
             <div className="mt-8 grid gap-3">
@@ -194,18 +179,18 @@ export function HomePage() {
               {[
                 {
                   step: "01",
-                  title: "Contexto rapido",
-                  text: "Captura datos basicos de empresa, sector, tamano y prioridad de negocio.",
+                  title: "Contexto rápido",
+                  text: "Comparte datos básicos de tu organización, sector, tamaño y prioridad de negocio.",
                 },
                 {
                   step: "02",
                   title: "Escala simple 1 a 5",
-                  text: "Responde doce preguntas con una escala clara para agilizar el levantamiento.",
+                  text: "Responde doce preguntas con una escala clara y fácil de contestar.",
                 },
                 {
                   step: "03",
                   title: "Resultado accionable",
-                  text: "Obtienes score, nivel, brechas, riesgos y una ruta sugerida descargable.",
+                  text: "Obtienes nivel de madurez, brechas, riesgos y una ruta sugerida descargable.",
                 },
               ].map((item) => (
                 <article
@@ -226,9 +211,9 @@ export function HomePage() {
             </div>
 
             <div className="mt-8 rounded-[28px] bg-[var(--navy)] px-6 py-6 text-white">
-              <p className="eyebrow text-[var(--amber)]">Sectores objetivo</p>
+              <p className="eyebrow text-[var(--amber)]">Sectores a los que va dirigido</p>
               <div className="mt-4 flex flex-wrap gap-3">
-                {sectors.map((sector) => (
+                {SECTORS.filter((sector) => sector !== "Otro").map((sector) => (
                   <span
                     key={sector}
                     className="rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-white/90"
@@ -245,22 +230,22 @@ export function HomePage() {
           <div className="surface-panel overflow-hidden px-6 py-8 md:px-8 md:py-10">
             <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
               <div>
-                <p className="eyebrow">Siguiente paso</p>
+                <p className="eyebrow">Utilidad del diagnóstico</p>
                 <h2 className="display-title mt-4 text-4xl font-semibold text-[var(--navy)] md:text-5xl">
-                  Si quieres vender confianza, el diagnostico debe verse ejecutivo
+                  Obtén una lectura clara para priorizar talento, procesos y adopción de IA
                 </h2>
                 <p className="mt-4 text-base leading-8 text-[var(--ink-soft)]">
-                  Esta version ya deja lista una base de producto para captar leads,
-                  generar reportes y abrir conversaciones comerciales en torno a
-                  programas de capacitacion en IA.
+                  El diagnóstico está diseñado para ayudarte a identificar prioridades
+                  reales de capacitación, conversar con liderazgo y detectar dónde
+                  conviene avanzar primero.
                 </p>
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
                 {[
-                  "Reporte con hallazgos, riesgos y roadmap",
-                  "Persistencia local de envios para demos y seguimiento",
-                  "Panel admin simple para revisar prospectos",
+                  "Reporte con hallazgos, riesgos y hoja de ruta",
+                  "Lectura útil para RH, liderazgo y responsables de capacitación",
+                  "Recomendaciones por prioridad y nivel de madurez",
                   "PDF descargable listo para compartir",
                 ].map((item) => (
                   <div
@@ -280,12 +265,6 @@ export function HomePage() {
               >
                 Empezar ahora
                 <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/admin"
-                className="inline-flex items-center justify-center rounded-full border border-[var(--line)] px-6 py-4 text-sm font-semibold text-[var(--navy)] transition hover:bg-white"
-              >
-                Ver envios guardados
               </Link>
             </div>
           </div>

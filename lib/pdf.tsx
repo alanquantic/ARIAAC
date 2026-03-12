@@ -140,17 +140,17 @@ function DiagnosticPdf({ submission }: { submission: SubmissionRecord }) {
   return (
     <Document
       author="AARIAC"
-      creator="AARIAC Diagnostico IA"
-      title={`Diagnostico IA - ${input.company}`}
+      creator="AARIAC Diagnóstico IA"
+      title={`Diagnóstico IA - ${input.company}`}
     >
       <Page size="A4" style={styles.page}>
         <View style={styles.hero}>
-          <Text style={styles.eyebrow}>AARIAC / Diagnostico ejecutivo</Text>
-          <Text style={styles.title}>Preparacion para capacitar talento en IA</Text>
+          <Text style={styles.eyebrow}>AARIAC / Diagnóstico ejecutivo</Text>
+          <Text style={styles.title}>Preparación para capacitar talento en IA</Text>
           <Text style={styles.subtitle}>
             Reporte generado para {input.company}. Este documento sintetiza el nivel
             de madurez actual, las brechas prioritarias y la ruta sugerida para
-            convertir la capacitacion en una ventaja competitiva.
+            convertir la capacitación en una ventaja competitiva.
           </Text>
           <View style={styles.scoreBadge}>
             <Text style={{ marginRight: 8 }}>{scores.overallScore}/100</Text>
@@ -172,7 +172,7 @@ function DiagnosticPdf({ submission }: { submission: SubmissionRecord }) {
               <Text style={styles.body}>{input.sector}</Text>
             </View>
             <View style={styles.card}>
-              <Text style={styles.cardLabel}>Tamano</Text>
+              <Text style={styles.cardLabel}>Tamaño</Text>
               <Text style={styles.body}>{input.companySize}</Text>
             </View>
             <View style={styles.card}>
@@ -189,14 +189,14 @@ function DiagnosticPdf({ submission }: { submission: SubmissionRecord }) {
         <View style={styles.footer}>
           <Text>
             Generado el {new Date(submission.createdAt).toLocaleDateString("es-MX")}
-            {"  "} | {"  "}Modo de redaccion: {report.aiMode}
+            {"  "} | {"  "}Modo de redacción: {report.aiMode}
           </Text>
         </View>
       </Page>
 
       <Page size="A4" style={styles.page}>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Resultado por dimension</Text>
+          <Text style={styles.sectionTitle}>Resultado por dimensión</Text>
           <View style={styles.cardGrid}>
             {Object.entries(scores.dimensionScores).map(([key, score]) => (
               <View key={key} style={styles.card}>
@@ -240,20 +240,20 @@ function DiagnosticPdf({ submission }: { submission: SubmissionRecord }) {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Enfoque de capacitacion recomendado</Text>
+          <Text style={styles.sectionTitle}>Enfoque de capacitación recomendado</Text>
           <Text style={styles.body}>{report.trainingRecommendation.headline}</Text>
           <Text style={[styles.body, { marginTop: 8, fontWeight: 700 }]}>
-            Publicos sugeridos
+            Públicos sugeridos
           </Text>
           <BulletList items={report.trainingRecommendation.audiences} />
           <Text style={[styles.body, { marginTop: 8, fontWeight: 700 }]}>
-            Modulos sugeridos
+            Módulos sugeridos
           </Text>
           <BulletList items={report.trainingRecommendation.modules} />
         </View>
 
         <View style={styles.footer}>
-          <Text>AARIAC | Diagnostico IA para RH Industrial</Text>
+          <Text>AARIAC | Diagnóstico de IA para organizaciones y empresas</Text>
         </View>
       </Page>
     </Document>

@@ -14,8 +14,8 @@ function average(values: number[]) {
 function getMaturityLevel(score: number): MaturityLevel {
   if (score < 40) return "Inicial";
   if (score < 60) return "Emergente";
-  if (score < 80) return "En transicion";
-  return "Estrategico";
+  if (score < 80) return "En transición";
+  return "Estratégico";
 }
 
 export function calculateScores(input: DiagnosticFormValues): ScoreBreakdown {

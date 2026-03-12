@@ -34,7 +34,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("diagnostic_submit_error", error);
     return NextResponse.json(
-      { error: "Ocurrio un problema al guardar el diagnostico." },
+      { error: "Ocurrió un problema al guardar el diagnóstico." },
       { status: 500 },
     );
   }

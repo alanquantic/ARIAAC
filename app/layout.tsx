@@ -20,9 +20,9 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AARIAC | Diagnostico IA para RH",
+  title: "AARIAC | Diagnóstico IA para RH",
   description:
-    "Diagnostico ejecutivo para evaluar que tan preparada esta una empresa para capacitar talento en IA.",
+    "Diagnóstico ejecutivo para evaluar qué tan preparada está una organización para capacitar talento en IA.",
 };
 
 export default function RootLayout({
