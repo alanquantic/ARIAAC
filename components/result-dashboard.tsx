@@ -76,7 +76,7 @@ export function ResultDashboard({ submission }: { submission: SubmissionRecord }
                 <div className="flex flex-col gap-3">
                   <a
                     href={`/api/diagnostics/${id}/pdf`}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--navy)] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                    className="cta-primary inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5"
                   >
                     <Download className="h-4 w-4" />
                     Descargar PDF

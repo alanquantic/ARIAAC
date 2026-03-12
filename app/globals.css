@@ -112,6 +112,29 @@ textarea {
   gap: 1rem;
 }
 
+.cta-primary {
+  background: var(--navy);
+  border: 1px solid rgba(15, 23, 42, 0.2);
+  box-shadow:
+    0 12px 24px rgba(15, 23, 42, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff;
+}
+
+.cta-primary:visited,
+.cta-primary:hover,
+.cta-primary:focus-visible,
+.cta-primary:active {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff;
+}
+
+.cta-primary svg {
+  color: currentColor;
+  flex-shrink: 0;
+}
+
 @media (min-width: 768px) {
   .section-grid {
     gap: 1.5rem;

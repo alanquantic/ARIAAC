@@ -15,7 +15,7 @@ export default function NotFound() {
         <div className="mt-8 flex justify-center">
           <Link
             href="/"
-            className="rounded-full bg-[var(--navy)] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+            className="cta-primary rounded-full px-6 py-3 text-sm font-semibold transition hover:-translate-y-0.5"
           >
             Volver al inicio
           </Link>

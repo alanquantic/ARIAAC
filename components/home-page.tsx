@@ -51,7 +51,7 @@ export function HomePage() {
           </div>
           <Link
             href="/diagnostico"
-            className="inline-flex items-center gap-2 rounded-full bg-[var(--navy)] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+            className="cta-primary inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5"
           >
             Iniciar diagnóstico
             <ArrowRight className="h-4 w-4" />
@@ -261,7 +261,7 @@ export function HomePage() {
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/diagnostico"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--navy)] px-6 py-4 text-sm font-semibold text-white transition hover:-translate-y-0.5"
+                className="cta-primary inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-semibold transition hover:-translate-y-0.5"
               >
                 Empezar ahora
                 <ArrowRight className="h-4 w-4" />
