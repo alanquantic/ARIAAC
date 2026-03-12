@@ -373,7 +373,7 @@ async function maybeEnhanceSummaryWithAI(
   fallbackReport: GeneratedReport,
 ): Promise<GeneratedReport> {
   const geminiApiKey = process.env.GEMINI_API_KEY;
-  const geminiModel = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
+  const geminiModel = process.env.GEMINI_MODEL ?? "gemini-3-flash-preview";
   const apiKey = process.env.OPENAI_API_KEY;
   const model = process.env.OPENAI_MODEL;
   const prompt = [

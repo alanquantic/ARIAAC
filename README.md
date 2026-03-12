@@ -30,7 +30,7 @@ Puedes agregar un archivo `.env.local` si quieres personalizar el comportamiento
 OPENAI_API_KEY=
 OPENAI_MODEL=
 GEMINI_API_KEY=
-GEMINI_MODEL=gemini-2.5-flash
+GEMINI_MODEL=gemini-3-flash-preview
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 RESEND_API_KEY=
 RESEND_FROM="AARIAC Diagnostico <noreply@updates.ceoslogica.com>"
