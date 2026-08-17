@@ -95,3 +95,20 @@ export async function saveSubmission(record: SubmissionRecord) {
   await writeFile(DATA_FILE, JSON.stringify(submissions, null, 2), "utf8");
   return record;
 }
+
+export async function isSubmissionRateLimited(
+  email: string,
+  maxSubmissions = 3,
+  windowMs = 24 * 60 * 60 * 1_000,
+) {
+  const cutoff = Date.now() - windowMs;
+  const normalizedEmail = email.trim().toLowerCase();
+  const submissions = await listSubmissions();
+  const recentCount = submissions.filter(
+    (submission) =>
+      submission.input.email.trim().toLowerCase() === normalizedEmail &&
+      Date.parse(submission.createdAt) >= cutoff,
+  ).length;
+
+  return recentCount >= maxSubmissions;
+}
