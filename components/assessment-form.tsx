@@ -1,6 +1,6 @@
 "use client";
 
-import { useDeferredValue, useState, useTransition } from "react";
+import { useDeferredValue, useEffect, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,9 +22,9 @@ import {
   SECTORS,
 } from "@/lib/constants";
 import {
-  DiagnosticFormInput,
-  DiagnosticFormSchema,
-  diagnosticFormSchema,
+  DiagnosticSubmissionInput,
+  DiagnosticSubmissionSchema,
+  diagnosticSubmissionSchema,
 } from "@/lib/validation";
 
 function FieldError({ message }: { message?: string }) {
@@ -76,7 +76,11 @@ function SelectField({
   );
 }
 
-export function AssessmentForm() {
+export function AssessmentForm({
+  initialFormToken,
+}: {
+  initialFormToken: string;
+}) {
   const router = useRouter();
   const [serverError, setServerError] = useState<string | null>(null);
   const [isRouting, startTransition] = useTransition();
@@ -85,9 +89,14 @@ export function AssessmentForm() {
     control,
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
-  } = useForm<DiagnosticFormInput, undefined, DiagnosticFormSchema>({
-    resolver: zodResolver(diagnosticFormSchema),
+  } = useForm<
+    DiagnosticSubmissionInput,
+    undefined,
+    DiagnosticSubmissionSchema
+  >({
+    resolver: zodResolver(diagnosticSubmissionSchema),
     mode: "onBlur",
     defaultValues: {
       name: "",
@@ -99,8 +108,29 @@ export function AssessmentForm() {
       region: "",
       businessPriority: "",
       mainConcern: "",
+      companyWebsite: "",
+      formToken: initialFormToken,
     },
   });
+
+  useEffect(() => {
+    const refreshToken = async () => {
+      try {
+        const response = await fetch("/api/form-token", { cache: "no-store" });
+        if (!response.ok) return;
+
+        const payload = (await response.json()) as { token?: string };
+        if (payload.token) {
+          setValue("formToken", payload.token);
+        }
+      } catch {
+        // The SSR token remains valid if a background refresh cannot be completed.
+      }
+    };
+
+    const interval = window.setInterval(refreshToken, 90 * 60 * 1_000);
+    return () => window.clearInterval(interval);
+  }, [setValue]);
 
   const values = useWatch({ control });
   const answeredCount = QUESTION_IDS.filter((id) => {
@@ -196,6 +226,17 @@ export function AssessmentForm() {
         </div>
 
         <form onSubmit={onSubmit} className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="hp-field" aria-hidden="true">
+            <label htmlFor="companyWebsite">Sitio web de la empresa</label>
+            <input
+              id="companyWebsite"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              {...register("companyWebsite")}
+            />
+          </div>
+          <input type="hidden" {...register("formToken")} />
           <div className="space-y-6">
             <section className="surface-panel px-5 py-6 md:px-6">
               <div className="flex items-start justify-between gap-4">

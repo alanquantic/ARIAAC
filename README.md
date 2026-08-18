@@ -37,10 +37,14 @@ RESEND_FROM="AARIAC Diagnostico <noreply@updates.ceoslogica.com>"
 RESEND_REPLY_TO=
 RESEND_ADMIN_TO=
 BLOB_READ_WRITE_TOKEN=
+FORM_SECRET=
 ```
 
 Si no defines esas variables, la app funciona con un motor de recomendaciones basado en reglas.
 Si defines `GEMINI_API_KEY`, la app puede reescribir el resumen ejecutivo y el impacto de negocio con Gemini.
+En producción configura `FORM_SECRET` con al menos 32 bytes aleatorios para activar la validación temporal anti-spam. Puedes generarlo con `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`.
+
+El formulario también integra Vercel BotID Basic, un honeypot accesible, validación estricta y un límite persistente de tres diagnósticos por correo cada 24 horas. BotID realiza la clasificación real al desplegar en Vercel; en desarrollo local devuelve `isBot: false`.
 
 ## Vercel
 
@@ -51,6 +55,7 @@ Para montarlo en Vercel:
    - `NEXT_PUBLIC_APP_URL`
    - `RESEND_API_KEY`
    - `RESEND_FROM`
+   - `FORM_SECRET`
    - `GEMINI_API_KEY` opcional
    - `GEMINI_MODEL` opcional
    - `RESEND_REPLY_TO` opcional

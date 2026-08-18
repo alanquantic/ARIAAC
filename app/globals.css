@@ -68,6 +68,15 @@ textarea {
   background: rgba(245, 158, 11, 0.28);
 }
 
+.hp-field {
+  height: 1px;
+  left: -9999px;
+  overflow: hidden;
+  position: absolute;
+  top: -9999px;
+  width: 1px;
+}
+
 .container-shell {
   margin: 0 auto;
   max-width: 1200px;
